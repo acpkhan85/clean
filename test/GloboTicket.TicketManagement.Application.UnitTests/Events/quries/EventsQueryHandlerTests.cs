@@ -46,9 +46,23 @@ namespace GloboTicket.TicketManagement.Application.UnitTests.Events.quries
 
             var eventdetail = new GetEventDetailQuery();
             eventdetail.Id = new Guid("B0788D2F-8003-43C1-92A4-EDC76A7C5DDE");
+ 
+            _mockEventRepository.Setup(repo => repo.GetByIdAsync(It.IsAny<Guid>())).ReturnsAsync(new Event
+            {
+                EventId = Guid.Parse("{BF3F3002-7E53-441E-8B76-F6280BE284AA}"),
+                Name = "Concerts"
+            });
+
+            _mockCategoryRepository.Setup(repo => repo.GetByIdAsync(It.IsAny<Guid>())).ReturnsAsync(new Category
+            {
+                CategoryId = Guid.Parse("{BF3F3002-7E53-441E-8B76-F6280BE284AA}"),
+                Name = "Concerts"
+            });
+
+
             var result = await handler.Handle(eventdetail, CancellationToken.None);
 
-            result.ShouldBeOfType<Response<IEnumerable<EventDetailVm>>>();
+            result.ShouldBeOfType<Response<EventDetailVm>>();
 
         }
     }
