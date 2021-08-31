@@ -16,8 +16,6 @@ namespace GloboTicket.TicketManagement.Api
         public async static Task Main(string[] args)
         {   
 
-
-
             //SERILOG IMPLEMENTATION
 
             var environment = Environment.GetEnvironmentVariable("ASPNETCORE_ENVIRONMENT");
